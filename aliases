@@ -1,0 +1,39 @@
+# source aliases or add these to your ~/.bashrc or ~/.zshrc
+alias terraform='docker run --rm -it \
+  -u $(id -u):$(id -g) \
+  -v "$(pwd)":/tmp/workspace \
+  -w /tmp/workspace \
+  -e HOME=/tmp \
+  hashicorp/terraform:latest'
+
+alias ansible-playbook='docker run --rm \
+  -u $(id -u):$(id -g) \
+  -v "$(pwd)":/ansible \
+  -v $SSH_AUTH_SOCK:/ssh-agent \
+  -e SSH_AUTH_SOCK=/ssh-agent \
+  -e ANSIBLE_CONFIG=/ansible/ansible.cfg \
+  -e ANSIBLE_FORCE_COLOR=1 \
+  -e HOME=/tmp \
+  ansible-runner'
+
+alias ansible='docker run --rm \
+  -u $(id -u):$(id -g) \
+  -v "$(pwd)":/ansible \
+  -v $SSH_AUTH_SOCK:/ssh-agent \
+  -e SSH_AUTH_SOCK=/ssh-agent \
+  -e ANSIBLE_CONFIG=/ansible/ansible.cfg \
+  -e ANSIBLE_FORCE_COLOR=1 \
+  -e HOME=/tmp \
+  --entrypoint ansible \
+  ansible-runner'
+
+alias ansible-lint='docker run --rm \
+  -u $(id -u):$(id -g) \
+  -v "$(pwd)":/ansible \
+  -v $SSH_AUTH_SOCK:/ssh-agent \
+  -e SSH_AUTH_SOCK=/ssh-agent \
+  -e ANSIBLE_CONFIG=/ansible/ansible.cfg \
+  -e ANSIBLE_FORCE_COLOR=1 \
+  -e HOME=/tmp \
+  --entrypoint ansible-lint \
+  ansible-runner'

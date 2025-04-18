@@ -1,0 +1,6 @@
+---
+# default system timezone
+system_timezone: "UTC"
+
+# default domain name
+domain_name: ""
