@@ -12,15 +12,14 @@ The Terraform code in this repository deploys:
 - Linode object storage for terraform state
 - Cloudflare DNS integration
 
-### Prerequisites
+## 🤖 Ansible Roles
 
-Before deploying the infrastructure, ensure you have:
+The Ansible code in this repository configures:
 
-- Docker installed on your local machine
-- Linode API token with read/write permissions
-- Cloudflare API token with DNS edit permissions
-- Cloudflare-managed domain and Zone ID
-- SSH public keys for admin and services access
+- Packages upgrade and auto-updates
+- Hostname and hosts settings
+- OS hardening
+- SSH hardening
 
 ## 🐳 Local Development Environment
 
