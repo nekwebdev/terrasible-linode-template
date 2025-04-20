@@ -9,6 +9,17 @@
       include_role:
         name: base_prep
 
-    - name: System hardening
+    - name: Dev-sec os hardening
       include_role:
-        name: hardening
+        name: devsec.hardening.os_hardening
+      vars:
+        sysctl_overwrite:
+          # Enable IPv4 traffic forwarding.
+          net.ipv4.ip_forward: 1
+
+    - name: Dev-sec ssh hardening
+      include_role:
+        name: devsec.hardening.ssh_hardening
+      vars:
+        ssh_server_ports:
+          - "{{ ansible_port }}"

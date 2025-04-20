@@ -26,6 +26,13 @@ Before deploying the infrastructure, ensure you have:
 
 This project uses Terraform and Ansible Docker containers for local development to ensure consistent environments across team members.
 
+Build the custom `ansible-runner` container:
+
+```bash
+cd ansible
+docker build -t ansible-runner .
+```
+
 Load the provided aliases for easy access to Terraform and Ansible commands:
 
 ```bash

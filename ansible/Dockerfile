@@ -21,10 +21,17 @@ RUN mkdir -p /home/ansible/.ssh && \
 USER ansible
 WORKDIR /ansible
 
+# Set environment variables for Ansible
+ENV ANSIBLE_COLLECTIONS_PATH=/home/ansible/.ansible/collections/ansible_collections
+
+# Install collections
+RUN mkdir -p $ANSIBLE_COLLECTIONS_PATH && \
+    ansible-galaxy collection install devsec.hardening
+
 # Set entrypoint to ansible-playbook
 ENTRYPOINT ["ansible-playbook"]
 
-# docker build -t ansible-runner -f ansible.dockerfile .
+# docker build -t ansible-runner -f Dockerfile .
 # Add these to your ~/.bashrc or ~/.zshrc
 # alias ansible-playbook='docker run --rm -v "$(pwd)":/ansible -v ~/.ssh:/home/ansible/.ssh:ro -e ANSIBLE_CONFIG=/ansible/ansible.cfg ansible-runner'
 # alias ansible='docker run --rm -v "$(pwd)":/ansible -v ~/.ssh:/home/ansible/.ssh:ro -e ANSIBLE_CONFIG=/ansible/ansible.cfg --entrypoint ansible ansible-runner'
